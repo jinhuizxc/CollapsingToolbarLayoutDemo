@@ -3,42 +3,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"> <!--记得要设layout_scrollFlags-->
+
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+        <!--android:id="@+id/collapse_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"-->
+        <!--app:collapsedTitleTextAppearance="@style/ToolBarTitleText"-->
+        <!--app:contentScrim="#46a8ba"-->
+        <!--app:expandedTitleMarginEnd="48dp"-->
+        <!--app:expandedTitleMarginStart="48dp"-->
+        <!--app:expandedTitleTextAppearance="@style/transparentText"-->
+        <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
+        <!--设置layout_scrollFlags保证CollapsingToolbarLayout能滚动-->
+        <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapse_toolbar"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:background="@color/colorAccent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_launcher" /> <!--这里的高度很关键，决定了收缩后顶部的高度--> <!--如果想收缩后还有其他控件就设大一点，否则wrap_content就好了--> <!--layout_collapseMode设为pin的话tollbar最后会留在顶部-->
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="top"
-                android:minHeight="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:titleMarginTop="15dp" />
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout> <!--一定要把layout_behavior设为@string/appbar_scrolling_view_behavior-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+
+            <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:gravity="top"-->
+            <!--android:minHeight="?attr/actionBarSize"-->
+            <!--app:layout_collapseMode="pin"-->
+            <!--app:titleMarginTop="15dp" />-->
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tabLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="49dp"-->
+        <!--app:tabIndicatorHeight="0dp"-->
+        <!--app:tabSelectedTextColor="@color/white"-->
+        <!--app:tabTextAppearance="@style/TabLayoutTextAppearance"-->
+        <!--app:tabTextColor="@color/colorAccent" />-->
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:background="#ffffff"
+            android:fillViewport="false"
+            app:layout_scrollFlags="scroll"
+            app:tabIndicatorColor="#0835f8"
+            app:tabIndicatorHeight="2.0dp"
+            app:tabSelectedTextColor="#0835f8"
+            app:tabTextColor="#151515" />
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <!--设置后滑动速度变慢-->
+        <!--<com.jh.collapsingtoolbarlayoutdemo.WrapContentHeightViewPager-->
+            <!--android:id="@+id/viewpager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:nestedScrollingEnabled="true"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+        <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    </android.support.v4.widget.NestedScrollView>
+    <!--在CoordinatorLayout中只要是能滑动控件的都需要设置layout_behavior-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+    <!--一定要把layout_behavior设为@string/appbar_scrolling_view_behavior-->
 
 </android.support.design.widget.CoordinatorLayout>
 
